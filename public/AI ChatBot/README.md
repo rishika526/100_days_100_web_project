@@ -6,28 +6,48 @@ A sleek, privacy-first AI chatbot powered by Google Gemini with dark mode, multi
 
 ## 🚀 Quick Start
 
-### Step 1: Get Your Gemini API Key
+### Step 1: Enable Gemini / Generative Language API
 
-1. Go to **[Google AI Studio](https://aistudio.google.com/app/apikey)**
-2. Click **"Create API Key"**
-3. Copy the key (starts with `AIza...`)
+1. Open **Google Cloud Console** and select your project.
+2. Go to **APIs & services → Library**.
+3. Search for **Generative Language API** or **Gemini API**.
+4. Click the API and press **Enable**.
 
-### Step 2: (Optional) Get a Hugging Face Key
+### Step 2: Create a Gemini API key
 
-1. Go to **[huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)**
-2. Click **"New token"** → Read access is enough
-3. Copy the token (starts with `hf_...`)
-4. Required only for `/imagine` image generation
+1. Go to **APIs & services → Credentials**.
+2. Click **+ Create Credentials → API Key**.
+3. Enter a name like `lumix-chatbot-key`.
+4. Check **Authenticate API calls through a service account**.
+5. Select or create a service account in the service account dropdown.
+6. Under **Select API restrictions**, choose **Gemini API** / **Generative Language API**.
+7. Leave **Application restrictions** set to **None** for local testing.
+8. Click **Create** and copy the generated key.
 
-### Step 3: Open the App
+> If the Gemini API option is greyed out, make sure the Generative Language API is enabled in the current project and that the service account is selected.
 
-1. Download the 3 files: `index.html`, `style.css`, `script.js`
-2. Place them in the **same folder**
-3. **Double-click `index.html`** to open in your browser
+### Step 3: (Optional) Get a Hugging Face key
 
-### Optional: Use a local default Gemini API key
+1. Go to **[huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)**.
+2. Click **"New token"** and grant **Read** access.
+3. Copy the token (starts with `hf_...`).
+4. This is only required for `/imagine` image generation.
 
-If you want to keep a Gemini key locally without committing it to git, create `public/AI ChatBot/default-config.js` with:
+### Step 4: Open the App
+
+1. Open `public/AI ChatBot/chatbot.html` in your browser.
+2. If you are running the repo locally, launch via Live Server or open the file directly.
+
+### Step 5: Enter Your Keys
+
+1. Open the chatbot settings using the gear icon.
+2. Paste your Gemini API key into the Gemini key field.
+3. Paste your Hugging Face key into the HF key field if you want image generation.
+4. Save the settings and start chatting.
+
+### Optional: Store a local default Gemini API key
+
+If you want to keep a local default key without committing it to git, create `public/AI ChatBot/default-config.js` with:
 
 ```js
 window.DEFAULT_GEMINI_API_KEY = "YOUR_GEMINI_KEY_HERE";
@@ -35,24 +55,17 @@ window.DEFAULT_GEMINI_API_KEY = "YOUR_GEMINI_KEY_HERE";
 
 That file is already gitignored by the project.
 
-### Hosted default key on deployment
+### Hosted deployment key
 
-If you deploy to Vercel, set the environment variable `GEMINI_API_KEY` in your Vercel project settings. The hosted app will automatically use that key as a default via `/api/gemini` when no local Gemini key is configured.
+If you deploy to Vercel, set the environment variable `GEMINI_API_KEY` in the Vercel project settings. The hosted app will use that key when no local browser key is configured.
 
-For local development with the proxy, create a `.env.local` file with:
+For local development with the proxy, use a `.env.local` file:
 
 ```bash
 GEMINI_API_KEY=your_real_gemini_key_here
 ```
 
-If you have a local key stored in the browser or in `default-config.js`, those will be used first instead.
-
-### Step 4: Enter Your Keys
-
-1. The onboarding wizard will guide you through 4 steps
-2. Paste your Gemini key on Step 3
-3. Paste your HF key on Step 4 (or skip)
-4. Click **"Start Chatting"**
+If a local browser key or `default-config.js` key exists, the app will use that first.
 
 ---
 
